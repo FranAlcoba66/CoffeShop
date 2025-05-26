@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
+    <style>
+        input, textarea, select {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(209, 213, 219, 0.5);
+            padding: 0.75rem;
+            width: 100%;
+            color: #1a202c !important;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            ring: 2px;
+            ring-color: rgba(99, 102, 241, 0.5);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+        .form-control {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900">
+
+    <div class="fixed inset-0 z-0">
+    <img src="{% static 'cafesote.jpg' %}"
+     class="w-full h-full object-cover"
+     alt="Coffee Shop Background">
+    <div class="absolute inset-0 bg-black/50"></div>
+
+    </div>
+    <div class="relative z-10"><!-- Contenido principal aquí -->
+    <header class="sticky top-0 z-50 shadow-md">
+        <nav class="bg-white/80 backdrop-blur-md border-b border-gray-200 px-4 lg:px-6 py-4 dark:bg-gray-800/80">
+            <div class="flex flex-wrap justify-between items-center mx-auto max-w-7xl">
+                <a href="{% url 'product_list' %}" class="flex items-center space-x-3 transition-transform hover:scale-105">
+                    <svg class="size-10 transform hover:rotate-12 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" xml:space="preserve">
+                        <!-- ... (mantener el SVG existente) ... -->
+                    </svg>
+                    <span class="self-center text-2xl font-bold text-gray-800 whitespace-nowrap dark:text-white">Coffee Shop</span>
+                </a>
+                <div class="flex items-center gap-4 lg:order-2">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'product_list' %}"
+                        class="transition-all duration-300 text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-gray-200 dark:hover:text-white dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                        Ver productos
+                    </a>
+                    <a href="{% url 'my_order' %}"
+                        class="transition-all duration-300 text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 shadow-lg hover:shadow-xl dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">
+                        Mi Pedido
+                    </a>
+                    <form action="{% url 'logout' %}" method="post" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" 
+                            class="transition-all duration-300 text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-gray-200 dark:hover:text-red-400 dark:hover:bg-gray-700 focus:outline-none">
+                            Cerrar sesión
+                        </button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'login' %}" 
+                        class="transition-all duration-300 text-gray-700 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none dark:focus:ring-gray-800">
+                        Login
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+        {% block content %}{% endblock content %}
+    </main>
+</div>
+<footer class="fixed bottom-0 left-0 right-0 py-6 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+    <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+            <p>&copy; {% now "Y" %} Coffee Shop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
