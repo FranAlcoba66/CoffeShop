@@ -1,16 +1,18 @@
-"""
-WSGI config for coffe_shop project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
-"""
-
 import os
+import sys
 
-from django.core.wsgi import get_wsgi_application
+# Añade el path de tu proyecto al PYTHONPATH
+project_home = '/home/franzAlcoba/CoffeShop'  # ajusta con tu ruta exacta
+if project_home not in sys.path:
+    sys.path.insert(0, project_home)
+
+# Activa el entorno virtual
+activate_env = '/home/franzAlcoba/CoffeShop/venv/bin/activate_this.py'  # ruta a tu activate_this.py
+with open(activate_env) as f:
+    exec(f.read(), {'__file__': activate_env})
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'coffe_shop.settings')
 
+from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
+# This file is used to configure the WSGI application for your Django project.
