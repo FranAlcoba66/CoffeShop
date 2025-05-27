@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import path , include
 from django.conf.urls.static import static
 from django.conf import settings
+from products.views import ProductListView
+from django.contrib.auth.views import LoginView
 
 urlpatterns = [
+    path('', ProductListView.as_view(), name='home'),  # Página principal: listado de productos
     path('admin/', admin.site.urls),
     path('productos/', include('products.urls')),
     path('usuarios/', include('users.urls')),
