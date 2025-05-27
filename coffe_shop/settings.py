@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@gf1m&%d2p_=p*ey=u53tx1um7jb*tua+jzs0q$ekl#($f&=tt'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['franzAlcoba.pythonanywhere.com']
+ALLOWED_HOSTS = [
+    'franzAlcoba.pythonanywhere.com',
+    '127.0.0.1']
 
 
 # Application definition
@@ -91,11 +92,11 @@ if DJANGO_ENV == 'production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'franzAlcoba$default',
-            'USER': 'franzAlcoba',
-            'PASSWORD': 'fitito23$',
-            'HOST': 'franzAlcoba.mysql.pythonanywhere-services.com',
-            'PORT': '3306',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT'),
         }
     }
 else:
