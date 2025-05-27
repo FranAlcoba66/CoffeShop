@@ -159,6 +159,9 @@ LOGOUT_REDIRECT_URL = 'login'
 
 LOGIN_URL = 'login'
 
+MEDIA_URL = '/logos/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'logos')
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
