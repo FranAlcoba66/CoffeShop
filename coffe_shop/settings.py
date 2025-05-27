@@ -80,6 +80,12 @@ WSGI_APPLICATION = 'coffe_shop.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# Detecta automáticamente si está en PythonAnywhere
+if 'PYTHONANYWHERE_DOMAIN' in os.environ:
+    DJANGO_ENV = 'production'
+else:
+    # Permite sobreescribir por variable de entorno si quieres
+    DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 
